@@ -73,7 +73,6 @@ router.get('/', auth.optional, function (req, res, next) {
       } else if (req.query.favorited) {
         query._id = { $in: [] }
       }
-      console.log('query', query)
 
       return Promise.all([
         Item.find(query)
