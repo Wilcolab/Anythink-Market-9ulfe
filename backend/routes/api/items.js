@@ -42,7 +42,7 @@ router.get('/', auth.optional, function (req, res, next) {
   var offset = 0
 
   if (typeof req.query.title !== 'undefined') {
-    title = req.query.title
+    query.title = req.query.title
   }
   if (typeof req.query.limit !== 'undefined') {
     limit = req.query.limit
@@ -73,6 +73,7 @@ router.get('/', auth.optional, function (req, res, next) {
       } else if (req.query.favorited) {
         query._id = { $in: [] }
       }
+      console.log('query', query)
 
       return Promise.all([
         Item.find(query)
