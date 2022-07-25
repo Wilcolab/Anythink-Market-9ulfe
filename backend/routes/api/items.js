@@ -104,6 +104,9 @@ router.get('/feed', auth.required, function (req, res, next) {
   var limit = 20
   var offset = 0
 
+  if (typeof req.query.title !== 'undefined') {
+    query.title = req.query.title
+  }
   if (typeof req.query.limit !== 'undefined') {
     limit = req.query.limit
   }
