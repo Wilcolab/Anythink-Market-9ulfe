@@ -12,7 +12,7 @@ const Banner = props => {
 
   React.useEffect(() => {
     props.onSearch(search)
-  }, [search])
+  }, [search, props])
 
   const optimizedFn = React.useCallback(debounce(handleChange), [])
   return (
