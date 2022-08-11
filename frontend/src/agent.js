@@ -62,6 +62,7 @@ const Items = {
     requests.get(`/items?favorited=${encode(seller)}&${limit(500, page)}`),
   feed: () => requests.get("/items/feed?limit=10&offset=0"),
   get: (slug) => requests.get(`/items/${slug}`),
+  filterByTitle: (title) => requests.get(`/items?title=${encode(title)}`),
   unfavorite: (slug) => requests.del(`/items/${slug}/favorite`),
   update: (item) =>
     requests.put(`/items/${item.slug}`, { item: omitSlug(item) }),

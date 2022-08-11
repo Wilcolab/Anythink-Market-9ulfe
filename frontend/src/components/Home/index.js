@@ -8,6 +8,7 @@ import {
   HOME_PAGE_LOADED,
   HOME_PAGE_UNLOADED,
   APPLY_TAG_FILTER,
+  APPLY_ITEM_FILTER,
 } from "../../constants/actionTypes";
 
 const Promise = global.Promise;
@@ -24,10 +25,12 @@ const mapDispatchToProps = (dispatch) => ({
   onLoad: (tab, pager, payload) =>
     dispatch({ type: HOME_PAGE_LOADED, tab, pager, payload }),
   onUnload: () => dispatch({ type: HOME_PAGE_UNLOADED }),
+  onSearch: (search) => dispatch({ search, type: APPLY_ITEM_FILTER }),
 });
 
 class Home extends React.Component {
   componentWillMount() {
+    console.log("items mounted");
     const tab = "all";
     const itemsPromise = agent.Items.all;
 
@@ -41,11 +44,14 @@ class Home extends React.Component {
   componentWillUnmount() {
     this.props.onUnload();
   }
+  componentDidUpdate() {
+    console.log("changed");
+  }
 
   render() {
     return (
       <div className="home-page">
-        <Banner />
+        <Banner onSearch={this.props.onSearch} />
 
         <div className="container page">
           <Tags tags={this.props.tags} onClickTag={this.props.onClickTag} />
