@@ -6,7 +6,7 @@ const Banner = (props) => {
   const [search, setSearch] = React.useState("");
   function handleChange(v) {
     agent.Items.filterByTitle(v).then((res) => {
-      setSearch(res.items);
+      setSearch({ items: res.items, searchTerm: v });
     });
   }
 
@@ -16,7 +16,13 @@ const Banner = (props) => {
 
   const optimizedFn = React.useCallback((val) => {
     let timer;
-    if (val.length < 3) return;
+    if (val.length < 3) {
+      if (timer) clearTimeout(timer);
+      timer = setTimeout(() => {
+        timer = null;
+        handleChange();
+      }, 500);
+    }
     if (timer) clearTimeout(timer);
     timer = setTimeout(() => {
       timer = null;
