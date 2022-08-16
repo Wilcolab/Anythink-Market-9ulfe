@@ -30,7 +30,6 @@ const mapDispatchToProps = (dispatch) => ({
 
 class Home extends React.Component {
   componentWillMount() {
-    console.log("items mounted");
     const tab = "all";
     const itemsPromise = agent.Items.all;
 
@@ -44,9 +43,6 @@ class Home extends React.Component {
   componentWillUnmount() {
     this.props.onUnload();
   }
-  componentDidUpdate() {
-    console.log("changed");
-  }
 
   render() {
     return (
@@ -55,7 +51,7 @@ class Home extends React.Component {
 
         <div className="container page">
           <Tags tags={this.props.tags} onClickTag={this.props.onClickTag} />
-          <MainView />
+          <MainView search={this.props} />
         </div>
       </div>
     );

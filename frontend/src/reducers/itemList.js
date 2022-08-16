@@ -41,7 +41,8 @@ const reducer = (state = {}, action) => {
       if (!action.search) return state;
       return {
         ...state,
-        items: action.search,
+        items: action.search.items,
+        search: action.search.searchTerm,
       };
 
     case APPLY_TAG_FILTER:
