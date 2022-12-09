@@ -17,8 +17,6 @@ var ItemSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-ItemSchema.index({ title: 'text' });
-
 ItemSchema.plugin(uniqueValidator, { message: "is already taken" });
 
 ItemSchema.pre("validate", function(next) {
