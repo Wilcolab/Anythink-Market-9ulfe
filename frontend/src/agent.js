@@ -59,7 +59,9 @@ const Items = {
   byTag: (tag, page) =>
     requests.get(`/items?tag=${encode(tag)}&${limit(1000, page)}`),
   del: (slug) => requests.del(`/items/${slug}`),
-  favorite: (slug) => requests.post(`/items/${slug}/favorite`),
+  favorite: (slug) => {
+    return requests.post(`/items/${slug}/favorite`);
+  },
   favoritedBy: (seller, page) =>
     requests.get(`/items?favorited=${encode(seller)}&${limit(500, page)}`),
   feed: () => requests.get("/items/feed?limit=10&offset=0"),
